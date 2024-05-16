@@ -7,11 +7,11 @@ class Poll(models.Model):
 
 
 class Question(models.Model):
-    question = models.CharField(max_length=100)
+    question = models.CharField(max_length=500)
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE, related_name="questions")
 
 
 class Option(models.Model):
-    text = models.TextField()
+    text = models.CharField(max_length=300)
     answer = models.BooleanField()
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="options")
