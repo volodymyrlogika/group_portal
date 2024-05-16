@@ -17,11 +17,17 @@ class Question(models.Model):
     max_points = models.IntegerField()
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE, related_name="questions")
 
+    def __str__(self):
+        return f"{self.poll.title}: {self.question}"
+
 
 class Option(models.Model):
     text = models.CharField(max_length=300)
     is_correct = models.BooleanField()
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="options")
+
+    def __str__(self):
+        return f"{self.question.question}: {self.text}"
 
 
 class UserPollResult(models.Model):
@@ -29,3 +35,6 @@ class UserPollResult(models.Model):
     poll = models.ForeignKey(Poll, on_delete=models.DO_NOTHING, related_name="poll_results")
     score = models.IntegerField()
     completed_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.poll.title}: {self.score}"
