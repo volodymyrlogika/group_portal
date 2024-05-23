@@ -4,4 +4,5 @@ from django.db import models
 class Announcement(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
+    imege = models.ImageField(upload_to='announcements/', null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
