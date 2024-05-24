@@ -13,10 +13,12 @@
             <div>
                 <span class="badge text-bg-primary"><i class="bi bi-person"></i>{{ branch.created_by }}</span>
                 <small class="text-white-50">{{ branch.created_at|date:"M d, H A" }}</small>
-
             </div>
         </a>
         {% endfor %}
         </div>
+        {% for page_num in page_obj.paginator.page_range %}
+        <a href="?page={{ page_num }}" class="display: inline-block btn btn-outline-primary mt-3">{{ page_num }}</a>
+        {% endfor %}
     </div>
 {% endblock %}

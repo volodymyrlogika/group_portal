@@ -12,6 +12,7 @@ class BranchListView(ListView):
     model = Branch
     context_object_name = "branches"
     template_name = "forum/branches_list.html"
+    paginate_by = 2
 
 
 class BranchDetailView(DetailView):
