@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, DeleteView, U
 from django.contrib.auth.mixins import LoginRequiredMixin
 from forum.forms import BranchCreate
 from django.urls import reverse_lazy
+from forum.mixins import UserIsOwnerMixin
 
 # Create your views here.
 
@@ -30,3 +31,9 @@ class BranchCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
+
+
+class BranchDeleteView(LoginRequiredMixin, UserIsOwnerMixin, DeleteView):
+    model = Branch
+    success_url = reverse_lazy("forum:branch-list")
+    template_name = "forum/branch_delete_confirm.html"
