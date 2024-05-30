@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from forum.models import Branch, Comment
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from forum.forms import BranchCreate
+from forum.forms import BranchCreate, CommentForm
 from django.urls import reverse_lazy
 from forum.mixins import UserIsOwnerMixin
 
@@ -21,6 +21,12 @@ class BranchDetailView(DetailView):
     context_object_name = "branch"
     template_name = "forum/branch_detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comment_form'] = CommentForm()
+
+        return context
+
 
 class BranchCreateView(LoginRequiredMixin, CreateView):
     model = Branch
@@ -37,3 +43,23 @@ class BranchDeleteView(LoginRequiredMixin, UserIsOwnerMixin, DeleteView):
     model = Branch
     success_url = reverse_lazy("forum:branch-list")
     template_name = "forum/branch_delete_confirm.html"
+
+
+class CommentCreateView(CreateView, LoginRequiredMixin):
+    model = Comment
+    form_class = CommentForm
+
+    def get_success_url(self):
+        return reverse_lazy("forum:branch-detailed", kwargs={"pk": self.object.forum.pk})
+
+    def get_branch(self):
+        branch_pk = self.kwargs.get("pk")
+
+        return get_object_or_404(Branch, pk=branch_pk)
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        form.instance.forum = self.get_branch()
+
+        return super().form_valid(form)
+

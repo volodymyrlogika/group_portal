@@ -10,3 +10,10 @@ class BranchCreate(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control mb-2'}),
             'description': forms.Textarea(attrs={'class': 'form-control mb-2'})
         }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["content"]
+        widgets = {'content': forms.Textarea(attrs={'class': 'form-control mb-2'})}

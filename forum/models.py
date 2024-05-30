@@ -15,12 +15,11 @@ class Branch(models.Model):
 
 
 class Comment(models.Model):
-    title = models.CharField(max_length=100)
     content = models.TextField()
     forum = models.ForeignKey(Branch, models.CASCADE, "comments")
     created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="comments")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.title
+        return self.content
 
