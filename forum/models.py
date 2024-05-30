@@ -9,6 +9,7 @@ class Branch(models.Model):
     description = models.TextField()
     created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="branches")
     created_at = models.DateTimeField(auto_now_add=True)
+    media = models.FileField(upload_to="branch_media", blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -19,6 +20,7 @@ class Comment(models.Model):
     branch = models.ForeignKey(Branch, models.CASCADE, "comments")
     created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="comments")
     created_at = models.DateTimeField(auto_now_add=True)
+    media = models.FileField(upload_to="comment_media", blank=True, null=True)
 
     def __str__(self):
         return self.content

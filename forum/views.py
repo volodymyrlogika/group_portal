@@ -70,3 +70,5 @@ class CommentDeleteView(LoginRequiredMixin, UserIsOwnerMixin, DeleteView):
 
     def get_success_url(self):
         return reverse_lazy("forum:branch-detailed", kwargs={"pk": self.object.branch.pk})
+
+
