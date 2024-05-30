@@ -16,7 +16,7 @@ class Branch(models.Model):
 
 class Comment(models.Model):
     content = models.TextField()
-    forum = models.ForeignKey(Branch, models.CASCADE, "comments")
+    branch = models.ForeignKey(Branch, models.CASCADE, "comments")
     created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="comments")
     created_at = models.DateTimeField(auto_now_add=True)
 

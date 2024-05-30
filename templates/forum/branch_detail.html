@@ -25,7 +25,7 @@
                     </div>
 
                     {% if request.user == comment.created_by %}
-                    <a href="#">
+                    <a href="{% url "forum:comment-delete" comment.pk %}">
                         <i class="bi bi-trash btn btn-danger align-items-center"></i>
                     </a>
                     {% endif %}

@@ -50,7 +50,7 @@ class CommentCreateView(CreateView, LoginRequiredMixin):
     form_class = CommentForm
 
     def get_success_url(self):
-        return reverse_lazy("forum:branch-detailed", kwargs={"pk": self.object.forum.pk})
+        return reverse_lazy("forum:branch-detailed", kwargs={"pk": self.object.branch.pk})
 
     def get_branch(self):
         branch_pk = self.kwargs.get("pk")
@@ -59,7 +59,14 @@ class CommentCreateView(CreateView, LoginRequiredMixin):
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
-        form.instance.forum = self.get_branch()
+        form.instance.branch = self.get_branch()
 
         return super().form_valid(form)
 
+
+class CommentDeleteView(LoginRequiredMixin, UserIsOwnerMixin, DeleteView):
+    model = Comment
+    template_name = "forum/comment_delete_confirmation.html"
+
+    def get_success_url(self):
+        return reverse_lazy("forum:branch-detailed", kwargs={"pk": self.object.branch.pk})
