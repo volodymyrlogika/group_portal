@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 gap-3">
+        {% for project in projects %}
+        <div class="col">
+            <div class="card" style="">
+                <img src="{{ project.screenshot.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.title }}</h5>
+                    <a href="{% url 'project-page' project.pk %}" class="btn btn-primary">Open</a>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
