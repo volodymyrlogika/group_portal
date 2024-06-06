@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+	<title>Delete Confirmation</title>
+{% endblock %}
+
+{% block content %}
+	<div class="container d-flex justify-content-center" style="margin-top: 37vh">
+    <form method="POST">
+        {% csrf_token %}
+        <h1 class="text-center">Are you sure?</h1>
+        {{ form }}
+        <button type="submit" class="btn btn-success align-self-center" style="width: 300px">Confirm</button>
+        <a href="{% url "forum:branch-detailed" comment.branch.pk %}" class="btn btn-danger align-self-center">Cancel</a>
+    </form>
+</div>
+{% endblock %}
