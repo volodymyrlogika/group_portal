@@ -15,15 +15,14 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Project',
+            name='Announcement',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100)),
-                ('description', models.TextField()),
-                ('screenshot', models.ImageField(blank=True, null=True, upload_to='project_screenshots/')),
-                ('links', models.URLField(blank=True, null=True)),
-                ('files', models.FileField(blank=True, null=True, upload_to='project_files/')),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('title', models.CharField(max_length=255)),
+                ('content', models.TextField()),
+                ('image', models.ImageField(blank=True, null=True, upload_to='announcements/')),
+                ('created', models.DateTimeField(auto_now_add=True)),
+                ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]
