@@ -4,7 +4,7 @@
    <div class="container">
 
 
-       <form method="post">
+       <form action="" method="post" enctype="multipart/form-data">
           {% csrf_token %}
             {{ form.as_div }}
            <button type="submit" class="btn btn-light"> Create </button>
