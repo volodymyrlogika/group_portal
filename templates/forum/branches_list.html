@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Forum</title>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center">Topics</h1>
+        <a href="{% url "forum:create-branch" %}" class="btn btn-primary m-3">Add New Branch</a>
+        <div class="list-group">
+        {% for branch in branches %}
+        <a href="{% url "forum:branch-detailed" branch.pk %}" class="list-group-item list-group-item-action d-flex justify-content-between">
+            {{ branch.title }}
+            <div>
+                <span class="badge text-bg-primary"><i class="bi bi-person"></i>{{ branch.created_by }}</span>
+                <small class="text-white-50">{{ branch.created_at|date:"M d, H A" }}</small>
+            </div>
+        </a>
+        {% endfor %}
+        </div>
+        {% for page_num in page_obj.paginator.page_range %}
+        <a href="?page={{ page_num }}" class="display: inline-block btn btn-outline-primary mt-3">{{ page_num }}</a>
+        {% endfor %}
+    </div>
+{% endblock %}

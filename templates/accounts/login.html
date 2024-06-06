@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <div class="container">
+   {% include 'alerts.html' %}
+   <h1 class="text-center">Login</h1>
+       <form method="post">
+          {% csrf_token %}
+            {{ form.as_div }}
+           <button type="submit" class="btn btn-light"> Login </button>
+ <a href="{% url 'accounts:register' %}" class="btn btn-outline-white">Register</a>
+       </form>
+
+   </div>
+
+{% endblock %}
