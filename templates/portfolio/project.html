@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+<h2>{{ project.title }}</h2>
+<p>{{ project.description }}</p>
+<img src="{{ project.screenshot.url }}" class="img-fluid d-block" alt="...">
+<a href="{{ project.links }}" class="btn btn-info my-4">Open Link</a>
+{% if project.files %}
+    <a href="{{ project.files.url }}" class="btn btn-info">Open Files</a>
+{% endif %}
+<h5>Author: {{ project.owner }}</h5>
+</div>
+
+{% endblock %}
