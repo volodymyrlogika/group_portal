@@ -2,12 +2,16 @@
 
 {% block content %}
 <div class="container">
-
+    <h2 class="text-center">Portfolio</h2>
+    <div class="d-flex justify-content-end"><a href="{% url 'project-create' %}" class="btn  btn-light " type="submit">Create</a>    </div>
+    
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 gap-3">
         {% for project in projects %}
         <div class="col">
             <div class="card" style="">
+                {% if project.screenshot %}
                 <img src="{{ project.screenshot.url }}" class="card-img-top" alt="...">
+                {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ project.title }}</h5>
                     <a href="{% url 'project-page' project.pk %}" class="btn btn-primary">Open</a>

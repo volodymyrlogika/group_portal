@@ -5,8 +5,13 @@
 <div class="container">
 <h2>{{ project.title }}</h2>
 <p>{{ project.description }}</p>
-<img src="{{ project.screenshot.url }}" class="img-fluid d-block" alt="...">
-<a href="{{ project.links }}" class="btn btn-info my-4">Open Link</a>
+    {% if project.screenshot %}
+    <img src="{{ project.screenshot.url }}" class="img-fluid d-block" alt="...">
+    {% endif %}
+    {% if project.links %}
+    <a href="{{ project.links }}" class="btn btn-info my-4" target="_blank">Open Link</a>
+    {% endif %}
+
 {% if project.files %}
     <a href="{{ project.files.url }}" class="btn btn-info">Open Files</a>
 {% endif %}
