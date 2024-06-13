@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from forum.models import Branch, Comment
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from forum.forms import BranchCreate, CommentForm
 from django.urls import reverse_lazy
 from forum.mixins import UserIsOwnerMixin
@@ -28,7 +28,7 @@ class BranchDetailView(DetailView):
         return context
 
 
-class BranchCreateView(LoginRequiredMixin, CreateView):
+class BranchCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Branch
     template_name = "forum/branch_form.html"
     form_class = BranchCreate
@@ -37,6 +37,12 @@ class BranchCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
+
+    def test_func(self):
+        return (
+                self.request.user.userprofile.role.name == "Moderator"
+                or self.request.user.userprofile.role.name == "Administrator"
+        )
 
 
 class BranchDeleteView(LoginRequiredMixin, UserIsOwnerMixin, DeleteView):
