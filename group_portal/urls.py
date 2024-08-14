@@ -26,7 +26,6 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('', BranchListView.as_view(), name="branch-list" ),
     path('forum/', include("forum.urls")),
-
     path('announcements/', include('announcements.urls')),
     path('portfolio/', include('portfolio.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
