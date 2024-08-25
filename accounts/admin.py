@@ -1,7 +1,13 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin
 
 from accounts.models import Role, UserProfile
 
-# Register your models here.
-admin.site.register(Role)
-admin.site.register(UserProfile)
+
+@admin.register(UserProfile)
+class UserProfileAdmin(ModelAdmin):
+    pass
+
+@admin.register(Role)
+class RoleAdmin(ModelAdmin):
+    pass

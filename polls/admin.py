@@ -1,25 +1,24 @@
 from django.contrib import admin
 from polls.models import Poll, Question, Option, UserPollResult
 
-# Register your models here.
+from unfold.admin import ModelAdmin
 
-
-class PollAdmin(admin.ModelAdmin):
+@admin.register(Poll)
+class PollAdmin(ModelAdmin):
     list_display = ("id", "title", "created_at", "created_by")
 
-class QuestionAdmin(admin.ModelAdmin):
+
+@admin.register(Question)
+class QuestionAdmin(ModelAdmin):
     list_display = ("id", "question", "max_points", "poll")
 
 
-class OptionAdmin(admin.ModelAdmin):
+@admin.register(Option)
+class OptionAdmin(ModelAdmin):
     list_display = ("id", "text", "is_correct", "question")
 
 
-class UserPollResultAdmin(admin.ModelAdmin):
+@admin.register(UserPollResult)
+class UserPollResultAdmin(ModelAdmin):
     list_display = ("id", "completed_by", "poll", "score", "completed_at")
 
-
-admin.site.register(Poll)
-admin.site.register(Question)
-admin.site.register(Option)
-admin.site.register(UserPollResult)
