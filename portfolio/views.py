@@ -1,4 +1,3 @@
-from msilib.schema import ListView
 from portfolio import models
 from django.views.generic import ListView, CreateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
